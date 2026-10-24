@@ -1,1 +1,39 @@
+1. What is the primary operational difference between git fetch and git pull?
 
+Answer: git fetch downloads updates from a remote repository without merging them into the current branch. In contrast, git pull downloads updates and integrates them into the current branch, usually through a merge or rebase.
+
+2. You have uncommitted changes in your working directory and need to temporarily switch to another branch. Which workflow prevents Git from blocking the checkout due to file overwrites?
+
+Answer: Use git stash to temporarily save the uncommitted changes, switch to the other branch using git checkout <branch-name> or git switch <branch-name>, and later restore the changes using git stash pop.
+
+3. When executing a git merge --no-ff command, what specific behavior is enforced by Git?
+
+Answer: The --no-ff option forces Git to create a merge commit even when a fast-forward merge is possible. This preserves the merge history of the branch.
+
+4. What happens when you check out a specific commit hash directly (e.g., git checkout a1b2c3d) instead of a branch name?
+
+Answer: Git enters a detached HEAD state. This means HEAD points directly to a specific commit rather than a branch. You can inspect the code or make temporary changes, but you should create a new branch if you want to preserve new commits.
+
+5. You need to apply a specific bug-fix commit from a development branch onto a stable release branch without merging the entire branch history. Which command should you use?
+
+Answer: Use git cherry-pick <commit-hash>. This applies the changes introduced by a specific commit to the current branch without merging the entire development branch.
+
+6. After performing a destructive git reset --hard operation, you realize you lost recent commits that were not on any branch. Which utility can retrieve these dangling commits?
+
+Answer: Use git reflog to locate the lost commit references. You can then recover a commit by creating a branch pointing to its hash using git branch recovery-branch <commit-hash>. If the commit is no longer listed in the reflog, git fsck --lost-found may help locate dangling commits.
+
+7. You want to remove untracked files and directories from your working tree, including ignored files listed in .gitignore. Which command flag combination achieves this?
+
+Answer: Use git clean -fdx. The -f flag forces removal, -d includes untracked directories, and -x includes ignored files. Use this command carefully because the deleted files cannot normally be recovered through Git.
+
+8. You need to undo a public commit that has already been pushed to a shared remote repository without altering the existing commit history or disrupting collaborators. Which command is appropriate?
+
+Answer: Use git revert <commit-hash>. This creates a new commit that reverses the changes introduced by the specified commit without rewriting the existing commit history.
+
+9. You want to identify the specific commit that introduced a regression bug in a codebase with hundreds of historical commits. Which utility automates this binary search process?
+
+Answer: Use git bisect. It performs a binary search through the commit history to identify the commit that introduced the bug by testing commits marked as good or bad.
+
+10. What is the function of the --amend flag when used with git commit?
+
+Answer: The --amend flag modifies the most recent commit. It can update the commit message or include additional staged changes. It creates a replacement commit, so avoid amending commits that have already been shared unless you understand the consequences of rewriting history.
